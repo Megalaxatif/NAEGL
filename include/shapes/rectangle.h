@@ -3,17 +3,17 @@
 #include "settings.h"
 
 typedef struct Rectangle {
-	size_t absolute_x;	// in pixels
-	size_t absolute_y;
-	size_t absolute_w;
-	size_t absolute_h;
+    size_t absolute_x;	// in pixels
+    size_t absolute_y;
+    size_t absolute_w;
+    size_t absolute_h;
 
-	double x;			// in percents, between 0. and 1.
-	double y;
-	double w;
-	double h;
+    double x;			// in percents, between 0. and 1.
+    double y;
+    double w;
+    double h;
 
-	RectangleSettings *settings;
+    RectangleSettings *settings;
 } Rectangle;
 
 Rectangle *createRectangle(double x, double y, double w, double h, RectangleSettings *settings, GuiContext *gui_context);
