@@ -15,3 +15,6 @@ typedef struct Rectangle {
 
 	RectangleSettings *settings;
 } Rectangle;
+
+Rectangle *createRectangle(double x, double y, double w, double h, RectangleSettings *settings, GuiContext *gui_context);
+int destroyRectangle(Rectangle *rectangle);
