@@ -107,6 +107,7 @@ RectangleSettings *createDefaultRectangleSettings(double w, double h, GuiContext
 int destroyRectangleSettings(RectangleSettings *settings);
 
 TextSettings *createTextSettings(ssize_t flags, GuiContext *gui_context);
+TextSettings *createDefaultTextSettings(GuiContext *gui_context);
 int destroyTextSettings(TextSettings *settings);
 
 ButtonSettings *createButtonSettings(ssize_t flags, GuiContext *gui_context);
