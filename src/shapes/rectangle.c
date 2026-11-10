@@ -61,8 +61,6 @@ RectangleSettings *createDefaultRectangleSettings(double w, double h, GuiContext
 
     RectangleSettings *r = malloc(sizeof(RectangleSettings));
 
-    r->border_color = DEFAULT_RECTANGLE_BORDER_COLOR;
-
     int win_w;
     int win_h;
     SDL_GetWindowSize(gui_context->window, &win_w, &win_h);
@@ -84,6 +82,7 @@ RectangleSettings *createDefaultRectangleSettings(double w, double h, GuiContext
     SDL_RenderClear(gui_context->renderer);
     SDL_SetRenderTarget(gui_context->renderer, NULL);
 
+    r->border_color = DEFAULT_RECTANGLE_BORDER_COLOR;
     r->texture = texture;
 
     r->corner_radius = DEFAULT_RECTANGLE_CORNER_RADIUS;

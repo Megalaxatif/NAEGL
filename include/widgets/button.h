@@ -7,6 +7,6 @@ typedef struct Button {
 	State state;
 } Button;
 
-Button *createButton(WidgetSettings *settings);
+Button *createButton();
 Button *createDefaultButton();
 int destroyButton(Button *button);

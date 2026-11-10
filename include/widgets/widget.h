@@ -13,12 +13,15 @@ typedef enum WidgetType {
 
 typedef union WidgetElement {
 	Button *button; // TODO: create and add other elements
+	//Slider *slider;
+	//TextBox *textBox;
 } WidgetElement;
 
 typedef struct Widget {
 	WidgetElement *element;
 	WidgetType *type;
+	Layout* layout; // the layout the widget belongs to
 } Widget;
 
-Widget *createWidget(WidgetType type, WidgetSettings *settings, GuiContext *gui_context);
+Widget *createWidget(WidgetType *type, Rectangle* rect, GuiContext* gui_context, ssize_t flags);
 int destroyWidget(Widget *widget);

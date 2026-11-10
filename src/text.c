@@ -52,4 +52,4 @@ TextSettings *createDefaultTextSettings(GuiContext *gui_context) // TODO
 	return NULL;
 }
 
-int destroyText(Text *text);
+int destroyText(Text *text){}

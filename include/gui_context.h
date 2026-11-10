@@ -7,16 +7,14 @@ typedef struct GuiContext {
     SDL_Window *window;
     SDL_Renderer *renderer;
     GuiContextSettings *settings;
-    WidgetSettingsArray *widget_settings;
-    size_t nb_widget_settings;
-    Layout *layouts;
-    size_t nb_layout;
-    LayoutSettingsArray *layout_settings;
-    size_t nb_layout_settings;
+    LayoutArray *layout_array;
     // shaders;
-    size_t nb_shader;
+    // TODO: add ShaderArray
+    //ShaderArray *shader_array;
 } GuiContext;
 
-GuiContext *createGuiContext(SDL_Window *window, SDL_Renderer *renderer, GuiContextSettings *settings);
-int destroyGuiContext(GuiContext *gui_context);
-int updateGuiContext(GuiContext *gui_context);
+int GuiContextSetDefaultLayoutSettings(LayoutSettings *settings); // COPY the given settings into the settings of the gui context
+
+GuiContext *CreateGuiContext(SDL_Window *window, SDL_Renderer *renderer, GuiContextSettings *settings);
+int DestroyGuiContext(GuiContext *gui_context);
+int UpdateGuiContext(GuiContext *gui_context);
