@@ -1,6 +1,7 @@
 #pragma once
 
 #include "settings.h"
+#include "layout.h"
 
 typedef struct Rectangle {
     size_t absolute_x;	// in pixels
@@ -13,8 +14,10 @@ typedef struct Rectangle {
     double w;
     double h;
 
+    Layout *layout;
+
     RectangleSettings *settings;
 } Rectangle;
 
-Rectangle *createRectangle(double x, double y, double w, double h, RectangleSettings *settings, GuiContext *gui_context);
-int destroyRectangle(Rectangle *rectangle);
+Rectangle *CreateRectangle(double x, double y, double w, double h, Layout *layout, ssize_t flags);
+int DestroyRectangle(Rectangle *rectangle);

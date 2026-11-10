@@ -3,10 +3,10 @@
 #include "settings.h"
 
 typedef struct Button {
-	ButtonSettings *settings;
-	State state;
+    ButtonSettings *settings;
+    State state;
 } Button;
 
-Button *createButton();
-Button *createDefaultButton();
-int destroyButton(Button *button);
+Button *CreateButton();
+Button *CreateDefaultButton();
+int DestroyButton(Button *button);

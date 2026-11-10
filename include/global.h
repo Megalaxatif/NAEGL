@@ -19,6 +19,7 @@
 #define COLOR_TRANSPARENT ((SDL_Color){0, 0, 0, 0})
 
 // SETTINGS
+// Widget Settings Flags (WSF)
 #define WSF_NONE_SHIFT              0
 #define WSF_ROUND_CORNERS_SHIFT     1
 #define WSF_TRANSPARENT_SHIFT       2
@@ -26,6 +27,9 @@
 #define WSF_INTERACTABLE_SHIFT      4
 #define WSF_SHADER_TEXT_SHIFT       5
 #define WSF_SHADER_TEXTURE_SHIFT    6
+
+// Laayout Settings Flags (LSF)
+#define LSF_NONESHIFT               0
 
 // DEFAULT VALUES
 // Rectangles

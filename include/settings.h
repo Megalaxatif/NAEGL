@@ -4,6 +4,8 @@
 #include "shapes/rectangle.h"
 #include "widgets/widget.h"
 
+// ------------------- STATE ------------------
+
 typedef enum State {
     STATE_IDLE = 0,
     STATE_HOVER,
@@ -12,24 +14,6 @@ typedef enum State {
 
     STATE_COUNT
 } MouseState;
-
-//-------------------- Layout --------------------
-
-typedef enum LayoutOrientation{
-    LAYOUT_ORIENTATION_VERTICAL,
-    LAYOUT_ORIENTATION_HORIZONTAL
-} LayoutOrientation;
-
-typedef struct LayoutSettings{
-    ButtonSettings* default_button_settings; // default settings for the button
-    //TextBoxSettings* defaultTextBoxSettings; // default settings for the text box
-    //SliderSettings* defaultSliderSettings; // default settings for the slider
-    int layout_orientation; // orientation of the layout (horizontal or vertical)
-    int layout_padding; // padding between the Widgets in the layout
-    int layout_originX; // x coordinate of the origin of the layout
-    int layout_originY; // y coordinate of the origin of the layout
-    int layout_shown; // bool to show or hide the layout
-} LayoutSettings;
 
 
 //-------------------- GUI --------------------
@@ -56,43 +40,36 @@ typedef struct GuiContextSettings {
     GuiSize size;
 } GuiContextSettings;
 
-//-------------------- Shapes --------------------
 
-typedef struct RectangleSettings {
-    SDL_Color border_color;
-    SDL_Texture *texture;
-    double corner_radius;	// 0. <= value <= 1.
-    double border_width;	// 0. <= value <= 1.
-    GuiContext *gui_context;
-} RectangleSettings;
+//-------------------- Layout --------------------
 
-//-------------------- Text --------------------
+typedef enum LayoutSettingsFlags {
+    LSF_DEFAULT = 0,
+    LSF_NONE = 1 << LSF_NONESHIFT
+} LayoutSettingsFlags;
 
-typedef struct TextSettings {
-    SDL_Font *font;
-    SDL_Color color;
-    SDL_Texture *texture;
-    double padding_x;	// 0. <= value <= 1.
-    double padding_y;	// 0. <= value <= 1.
-    GuiContext *gui_context;
-} TextSettings;
+typedef enum LayoutOrientation{
+    LAYOUT_ORIENTATION_VERTICAL,
+    LAYOUT_ORIENTATION_HORIZONTAL
+} LayoutOrientation;
 
-//-------------------- Button --------------------
-
-typedef struct ButtonSettings {
-    Rectangle *rect[STATE_COUNT];
-    Text *text[STATE_COUNT];
-    SDL_Texture *texture[STATE_COUNT];		// Is a mix of the textures from rect and text (raw without shader)
-    void (*StateFunction)(void *args)[STATE_COUNT];
+typedef struct LayoutSettings{
+    ButtonSettings* default_button_settings; // default settings for the button
+    // TextBoxSettings* default_textbox_settings; // default settings for the text box
+    // SliderSettings* default_slider_settings; // default settings for the slider
+    int layout_orientation; // orientation of the layout (horizontal or vertical)
+    int layout_padding; // padding between the Widgets in the layout
+    int layout_originX; // x coordinate of the origin of the layout
+    int layout_originY; // y coordinate of the origin of the layout
+    int layout_shown; // bool to show or hide the layout
     ssize_t flags;
     GuiContext *gui_context;
-    // TODO link a shader
-} ButtonSettings;
+} LayoutSettings;
 
 //-------------------- Widget --------------------
 
-typedef enum WidgetSettingsFlag {	// WSF_ for Widget Settings Flag
-    WSF_DEFAULT = 0,				// TODO: apply wanted parameters
+typedef enum WidgetSettingsFlag {   // WSF_ for Widget Settings Flag
+    WSF_DEFAULT = 0,                // TODO: apply wanted parameters
     WSF_NONE = 1 << WSF_NONE_SHIFT,
     WSF_ROUND_CORNERS = 1 << WSF_ROUND_CORNERS_SHIFT,
     WSF_TRANSPARENT = 1 << WSF_TRANSPARENT_SHIFT,
@@ -109,21 +86,55 @@ typedef union WidgetSettings { // TODO: Create and add other widget settings
 } WidgetSettings;
 
 
+//-------------------- Button --------------------
+
+typedef struct ButtonSettings {
+    Rectangle *rect[STATE_COUNT];
+    Text *text[STATE_COUNT];
+    SDL_Texture *texture[STATE_COUNT];      // Is a mix of the textures from rect and text (raw without shader)
+    void (*StateFunction)(void *args)[STATE_COUNT];
+    ssize_t flags;
+    Layout *layout;
+    // TODO link a shader
+} ButtonSettings;
+
+
+//-------------------- Shapes --------------------
+
+typedef struct RectangleSettings {
+    SDL_Color border_color;
+    SDL_Texture *texture;
+    double corner_radius;	// 0. <= value <= 1.
+    double border_width;	// 0. <= value <= 1.
+    ssize_t flags;
+    Layout *layout;
+} RectangleSettings;
+
+//-------------------- Text --------------------
+
+typedef struct TextSettings {
+    SDL_Font *font;
+    SDL_Color color;
+    SDL_Texture *texture;
+    double padding_x;	// 0. <= value <= 1.
+    double padding_y;	// 0. <= value <= 1.
+    ssize_t flags;
+    Layout *layout;
+} TextSettings;
+
+
 //-------------------- Functions --------------------
 
 GuiContextSettings *createGuiContextSettings(ssize_t flags); // function called for custom flags
-GuiContextSettings *createDefaultGuiContextSettings();      // function called for the default flags
 int destroyGuiContextSettings(GuiContextSettings *settings);
 
-RectangleSettings *createRectangleSettings(ssize_t flags, Layout *layout);
-RectangleSettings *createDefaultRectangleSettings(double w, double h, Layout *layout);
+RectangleSettings *createRectangleSettings(double w, double h, Layout *layout, ssize_t flags);
 int destroyRectangleSettings(RectangleSettings *settings);
 
-TextSettings *createTextSettings(ssize_t flags, Layout *layout);
-TextSettings *createDefaultTextSettings(Layout *layout);
+TextSettings *createTextSettings(Layout *layout, ssize_t flags);
 int destroyTextSettings(TextSettings *settings);
 
-ButtonSettings *createButtonSettings(ssize_t flags, Layout *layout);
+ButtonSettings *createButtonSettings(Layout *layout, ssize_t flags);
 int destroyButtonSettings(ButtonSettings *settings);
 
 WidgetSettings *createWidgetSettings(Rectangle *rect, WidgetType type, Layout *layout, ssize_t flags);
