@@ -7,14 +7,13 @@
 // ------------------- STATE ------------------
 
 typedef enum State {
-    STATE_IDLE = 0,
-    STATE_HOVER,
+    STATE_RELEASED = 0,
+    STATE_HOVERED,
     STATE_PRESSED,
     STATE_DISABLED,
 
     STATE_COUNT
-} MouseState;
-
+} State;
 
 //-------------------- GUI --------------------
 
@@ -43,22 +42,27 @@ typedef struct GuiContextSettings {
 
 //-------------------- Layout --------------------
 
+typedef enum LayoutDisplayOption {
+    LDO_ON, // the layout displays every widgets
+    LDO_OFF, // the layout doesn't display any widget
+    LDO_FREE // the layout lets the widget decide if it is displayed or not
+} LayoutDisplayOption;
+
 typedef enum LayoutSettingsFlags {
     LSF_DEFAULT = 0,
     LSF_NONE = 1 << LSF_NONESHIFT,
-    LSF_LAYOUT_ORIENTATION_VERTICAL = 1 << LSF_VERTICAL_SHIFT,
-    LSF_LAYOUT_ORIENTATION_HORIZONTAL = 1 << LSF_HORIZONTAL_SHIFT
+    LSF_ORIENTATION_VERTICAL = 1 << LSF_VERTICAL_SHIFT,
+    LSF_ORIENTATION_HORIZONTAL =  0 << LSF_HORIZONTAL_SHIFT,
 } LayoutSettingsFlags;
 
 typedef struct LayoutSettings{
     ButtonSettings* default_button_settings; // default settings for the button
     // TextBoxSettings* default_textbox_settings; // default settings for the text box
     // SliderSettings* default_slider_settings; // default settings for the slider
-    int layout_orientation; // orientation of the layout (horizontal or vertical)
     int layout_padding; // padding between the Widgets in the layout
     int layout_originX; // x coordinate of the origin of the layout
     int layout_originY; // y coordinate of the origin of the layout
-    int layout_shown; // bool to show or hide the layout
+    LayoutDisplayOption display_option; // ON, OFF or FREE
     ssize_t flags;
     GuiContext *gui_context;
 } LayoutSettings;
@@ -73,7 +77,9 @@ typedef enum WidgetSettingsFlag {   // WSF_ for Widget Settings Flag
     WSF_ANIMATED = 1 << WSF_ANIMATED_SHIFT,
     WSF_INTERACTABLE = 1 << WSF_INTERACTABLE_SHIFT,
     WSF_SHADER_TEXT = 1 << WSF_SHADER_TEXT_SHIFT,
-    WSF_SHADER_TEXTURE = 1 << WSF_SHADER_TEXTURE_SHIFT
+    WSF_SHADER_TEXTURE = 1 << WSF_SHADER_TEXTURE_SHIFT,
+    WSF_SHOWN = 1 << WSF_SHOWN_SHIFT
+
 } WidgetSettingsFlag;
 
 typedef union WidgetSettings { // TODO: Create and add other widget settings
