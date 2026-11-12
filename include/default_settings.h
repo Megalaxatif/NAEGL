@@ -13,7 +13,8 @@
 
 // Text
 #define DEFAULT_TEXT_TEXT "default text"
-#define DEFAULT_TEXT_FONT "assets/fonts/arial.ttf"
+#define DEFAULT_TEXT_FONT_PATH "assets/fonts/arial.ttf"
+#define DEFAULT_TEXT_FONT_SIZE 32
 #define DEFAULT_TEXT_FONT_COLOR COLOR_BLACK
 #define DEFAULT_TEXT_SIZE       0.05
 #define DEFAULT_TEXT_PADDING_X  0.
