@@ -6,6 +6,7 @@ simplified pipeline:
 NOTE: shader programs will execute at display
 
 TODOs:
+-create a new kind of layout that put the widgets in a grid
 -move textures out of settings, because settings could be shared and not textures
 -move rectangle and text to widgets (update enums and settings also)
 -propagate flags during init of widgets

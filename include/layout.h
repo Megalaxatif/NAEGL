@@ -2,26 +2,21 @@
 
 #include "settings.h"
 #include "gui_context.h"
+#include "arrays.h"
+
+
 
 typedef struct Layout {
     LayoutSettings *settings;
-    size_t capacity;
-    size_t widget_count;
-    Widget **widgets;
+    WidgetArray *widget_array;
     GuiContext *gui_context;
 } Layout;
 
-typedef struct LayoutArray {
-    size_t capacity;
-    size_t count;
-    Layout **layouts;
-} LayoutArray;
-
-Layout *CreateLayout(GuiContext *gui_context, ssize_t flags);
+Layout *CreateLayout(GuiContext *gui_context, int origin_y, int origin_y, int ssize_t flags);
 int DestroyLayout(Layout *layout);
 
 // COPY the given settings of the corresponding widget into the settings of the layout
-int LayoutSetDefaultSettings(WidgetSettings *settings, WidgetType *widgetType, Layout* layout);
+int LayoutSetWidgetDefaultSettings(Layout* layout, WidgetSettings *settings, WidgetType *widgetType);
 
 // create a widget, copy the corresponding default settings of the layout into it and add the widget to the layout
 int LayoutCreateWidget(WidgetType *widgetType, Layout *layout, ssize_t flags);

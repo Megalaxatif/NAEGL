@@ -45,13 +45,10 @@ typedef struct GuiContextSettings {
 
 typedef enum LayoutSettingsFlags {
     LSF_DEFAULT = 0,
-    LSF_NONE = 1 << LSF_NONESHIFT
+    LSF_NONE = 1 << LSF_NONESHIFT,
+    LSF_LAYOUT_ORIENTATION_VERTICAL = 1 << LSF_VERTICAL_SHIFT,
+    LSF_LAYOUT_ORIENTATION_HORIZONTAL = 1 << LSF_HORIZONTAL_SHIFT
 } LayoutSettingsFlags;
-
-typedef enum LayoutOrientation{
-    LAYOUT_ORIENTATION_VERTICAL,
-    LAYOUT_ORIENTATION_HORIZONTAL
-} LayoutOrientation;
 
 typedef struct LayoutSettings{
     ButtonSettings* default_button_settings; // default settings for the button
@@ -125,17 +122,20 @@ typedef struct TextSettings {
 
 //-------------------- Functions --------------------
 
-GuiContextSettings *createGuiContextSettings(ssize_t flags); // function called for custom flags
-int destroyGuiContextSettings(GuiContextSettings *settings);
+GuiContextSettings *CreateGuiContextSettings(ssize_t flags);
+int DestroyGuiContextSettings(GuiContextSettings *settings);
 
-RectangleSettings *createRectangleSettings(double w, double h, Layout *layout, ssize_t flags);
-int destroyRectangleSettings(RectangleSettings *settings);
+LayoutSettings *CreateLayoutSettings(GuiContext *context, ssize_t flags); // create settings based on the default settings of the given gui context, gui context set to NULL will create default settings
+int DestroyLayoutSettings(LayoutSettings *settings);
 
-TextSettings *createTextSettings(Layout *layout, ssize_t flags);
-int destroyTextSettings(TextSettings *settings);
+RectangleSettings *CreateRectangleSettings(double w, double h, Layout *layout, ssize_t flags); // create settings based on the default settings of the given layout, layout set to NULL will create default settings
+int DestroyRectangleSettings(RectangleSettings *settings);
 
-ButtonSettings *createButtonSettings(Layout *layout, ssize_t flags);
-int destroyButtonSettings(ButtonSettings *settings);
+TextSettings *CreateTextSettings(Layout *layout, ssize_t flags); // create settings based on the default settings of the given layout, layout set to NULL will create default settings
+int DestroyTextSettings(TextSettings *settings);
 
-WidgetSettings *createWidgetSettings(Rectangle *rect, WidgetType type, Layout *layout, ssize_t flags);
-int destroyWidgetSettings(WidgetSettings *settings);
+ButtonSettings *CreateButtonSettings(Layout *layout, ssize_t flags); // create settings based on the default settings of the given layout, layout set to NULL will create default settings
+int DestroyButtonSettings(ButtonSettings *settings);
+
+WidgetSettings *CreateWidgetSettings(Rectangle *rect, WidgetType type, Layout *layout, ssize_t flags); // create settings based on the default settings of the given layout, layout set to NULL will create default settings
+int DestroyWidgetSettings(WidgetSettings *settings);
