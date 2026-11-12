@@ -28,27 +28,8 @@
 #define WSF_SHADER_TEXT_SHIFT       5
 #define WSF_SHADER_TEXTURE_SHIFT    6
 
-// aayout Settings Flags shift (LSF)
+// layout Settings Flags shift (LSF)
 #define LSF_NONESHIFT               0
-
-// DEFAULT VALUES
-// Rectangles
-#define DEFAULT_RECTANGLE_X 0
-#define DEFAULT_RECTANGLE_Y 0
-#define DEFAULT_RECTANGLE_W 0.1
-#define DEFAULT_RECTANGLE_H 0.05
-#define DEFAULT_RECTANGLE_BORDER_COLOR COLOR_BLACK
-#define DEFAULT_RECTANGLE_TEXTURE_COLOR COLOR_LIGHT_GRAY
-#define DEFAULT_RECTANGLE_CORNER_RADIUS 0.005
-#define DEFAULT_RECTANGLE_BORDER_WIDTH  0.005
-
-// Text
-#define DEFAULT_TEXT_TEXT "default text"
-#define DEFAULT_TEXT_FONT "assets/fonts/arial.ttf"
-#define DEFAULT_TEXT_FONT_COLOR COLOR_BLACK
-#define DEFAULT_TEXT_SIZE       0.05
-#define DEFAULT_TEXT_PADDING_X  0.
-#define DEFAULT_TEXT_PADDING_Y  0.
 
 // GUI_SIZE
 #define GUI_SIZE_TINY_COEFF     0.25
